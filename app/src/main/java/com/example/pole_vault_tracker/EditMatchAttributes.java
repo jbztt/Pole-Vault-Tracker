@@ -6,9 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +13,6 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -31,10 +26,10 @@ public class EditMatchAttributes extends AppCompatActivity implements ActivityCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_match_attributes);
-        matchLocationEditText = (TextInputEditText) findViewById(R.id.match_location_edit_text);
+        matchLocationEditText = findViewById(R.id.match_location_edit_text);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         ((TextInputLayout) findViewById(R.id.match_location_input_layout)).setEndIconOnClickListener(v -> getLocation());
-        ((Button)findViewById(R.id.start_match_btn)).setOnClickListener(v -> startActivity(new Intent(this, EditMatchEvents.class)));
+        findViewById(R.id.start_match_btn).setOnClickListener(v -> startActivity(new Intent(this, EditMatchEvents.class)));
     }
 
     public void getLocation() {
@@ -44,8 +39,10 @@ public class EditMatchAttributes extends AppCompatActivity implements ActivityCo
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, location -> {
             try {
-                matchLocationEditText.setText(new Geocoder(this, Locale.getDefault())
-                        .getFromLocation(location.getLatitude(), location.getLongitude(), 1).get(0).getAddressLine(0));
+                matchLocationEditText.setText(
+                        new Geocoder(this, Locale.getDefault()).getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1).get(0).getAddressLine(0)
+                );
             } catch (IOException e) {
                 e.printStackTrace();
             }

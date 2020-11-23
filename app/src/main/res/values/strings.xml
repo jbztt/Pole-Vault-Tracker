@@ -5,4 +5,10 @@
     <string name="player_name_edit_text_hint">Player Name</string>
     <string name="location_edit_text_hint">Location</string>
     <string name="start_match_btn_text">Start Match</string>
+    <string name="new_jump_btn_text">New Jump</string>
+    <string name="successful_jump_checkbox_text">Success</string>
+    <string name="approach_and_plant_section_text_view_text">Approach and Plant</string>
+    <string name="jump_section_score_edit_text_hint">Score</string>
+    <string name="takeoff_and_swing_up_section_text_view_text">Takeoff and Swing Up</string>
+    <string name="extension_and_turn_section_text_view_text">Extension and Turn</string>
 </resources>
