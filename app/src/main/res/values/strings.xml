@@ -11,4 +11,6 @@
     <string name="jump_section_score_edit_text_hint">Score</string>
     <string name="takeoff_and_swing_up_section_text_view_text">Takeoff and Swing Up</string>
     <string name="extension_and_turn_section_text_view_text">Extension and Turn</string>
+    <string name="game_list_row_player_name_text_view_text">Player Name</string>
+    <string name="game_list_row_location_text_view_text">Location</string>
 </resources>
