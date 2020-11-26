@@ -15,11 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Local extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 12;
     private static final String DATABASE_NAME = "PoleVaultTracker.db";
-    private static final String SHARED_PREFERENCES_NAME = "LocalStorageSharedPreferences";
     private static final String[] GAME_TABLE_SELECTION = {Common.Game._ID, Common.Game.COLUMN_NAME_PLAYER_NAME, Common.Game.COLUMN_NAME_LOCATION};
     private static final String[] JUMP_TABLE_SELECTION = {Common.Jump._ID, Common.Jump.COLUMN_NAME_GAME_ID, Common.Jump.COLUMN_NAME_JUMP_HEIGHT, Common.Jump.COLUMN_NAME_SUCCESS, Common.Jump.COLUMN_NAME_DESCRIPTION};
+    private static final String SQL_CREATE_JUMPS = String
+            .format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s INTEGER, %s BOOLEAN, %s FLOAT, %s TEXT, FOREIGN KEY (%s) REFERENCES %s(%s)ON DELETE CASCADE ON UPDATE CASCADE)",
+                    Common.Jump.TABLE_NAME, Common.Jump._ID, Common.Jump.COLUMN_NAME_GAME_ID, Common.Jump.COLUMN_NAME_SUCCESS, Common.Jump.COLUMN_NAME_JUMP_HEIGHT,
+                    Common.Jump.COLUMN_NAME_DESCRIPTION, Common.Jump.COLUMN_NAME_GAME_ID, Common.Game.TABLE_NAME, Common.Game._ID);
+    private static final String SQL_CREATE_GAMES = String
+            .format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT)",
+                    Common.Game.TABLE_NAME, Common.Game._ID, Common.Game.COLUMN_NAME_PLAYER_NAME, Common.Game.COLUMN_NAME_LOCATION);
+
+    private static final String SQL_DELETE_GAMES = String.format("DROP TABLE IF EXISTS %s", Common.Game.TABLE_NAME);
+    private static final String SQL_DELETE_JUMPS = String.format("DROP TABLE IF EXISTS %s", Common.Jump.TABLE_NAME);
+
     private static Local instance;
 
     public Local(@Nullable Context context) {
@@ -55,8 +65,14 @@ public class Local extends SQLiteOpenHelper {
     }
 
     public static void updateJump(Context context, Jump jump) {
+        updateJump(context, jump.getId(), jump);
+    }
+
+    public static void updateJump(Context context, long oldID, Jump jump) {
+        ContentValues contentValues = jumpContentValues(jump);
+        contentValues.put(Common.Jump._ID, jump.getId());
         getInstance(context).getWritableDatabase()
-                .update(Common.Jump.TABLE_NAME, jumpContentValues(jump), Common.Jump._ID + "=" + jump.getId(), null);
+                .update(Common.Jump.TABLE_NAME, contentValues , Common.Jump._ID + "=" + oldID, null);
     }
 
     public static void deleteJump(Context context, long jumpID) {
@@ -88,8 +104,14 @@ public class Local extends SQLiteOpenHelper {
     }
 
     public static void updateGame(Context context, Game game) {
+        updateGame(context, game.getId(),game);
+    }
+
+    public static void updateGame(Context context, long oldGameID, Game game){
+        ContentValues contentValues = gameContentValues(game);
+        contentValues.put(Common.Game._ID, game.getId());
         getInstance(context).getWritableDatabase()
-                .update(Common.Game.TABLE_NAME, gameContentValues(game), Common.Game._ID + "=" + game.getId(), null);
+                .update(Common.Game.TABLE_NAME, contentValues, Common.Game._ID + "=" + oldGameID, null);
     }
 
     public static void deleteGame(Context context, long id) {
@@ -113,23 +135,23 @@ public class Local extends SQLiteOpenHelper {
     }
 
     public static void setActiveJumpID(Context context, long id) {
-        context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).edit().putLong(Common.SHARED_PREFERENCE_KEY_JUMP_ID, id).apply();
+        context.getSharedPreferences(Common.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).edit().putLong(Common.SHARED_PREFERENCE_KEY_JUMP_ID, id).apply();
     }
 
     public static long getActiveJumpID(Context context) {
-        long jumpID = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).getLong(Common.SHARED_PREFERENCE_KEY_JUMP_ID, -1);
+        long jumpID = context.getSharedPreferences(Common.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).getLong(Common.SHARED_PREFERENCE_KEY_JUMP_ID, -1);
         if (-1 == jumpID) throw new IllegalStateException("Cannot retrieve active jumpID");
         return jumpID;
     }
 
     public static long getActiveGameID(Context context) {
-        long gameID = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).getLong(Common.SHARED_PREFERENCE_KEY_GAME_ID, -1);
+        long gameID = context.getSharedPreferences(Common.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).getLong(Common.SHARED_PREFERENCE_KEY_GAME_ID, -1);
         if (-1 == gameID) throw new IllegalStateException("Cannot retrieve active gameID");
         return gameID;
     }
 
     public static void setActiveGameID(Context context, long id) {
-        context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).edit().putLong(Common.SHARED_PREFERENCE_KEY_GAME_ID, id).apply();
+        context.getSharedPreferences(Common.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE).edit().putLong(Common.SHARED_PREFERENCE_KEY_GAME_ID, id).apply();
     }
 
     private static Jump jumpFromCursor(Cursor cursor) {
@@ -143,21 +165,22 @@ public class Local extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Common.SQL_CREATE_GAMES);
+        db.execSQL(SQL_CREATE_GAMES);
         db.execSQL(
-                "CREATE TRIGGER prune_games AFTER INSERT ON " + Common.Game.TABLE_NAME + "\n" +
+                "CREATE TRIGGER prune_games BEFORE INSERT ON " + Common.Game.TABLE_NAME + "\n" +
                         "BEGIN\n" +
                         "  DELETE FROM " + Common.Game.TABLE_NAME
                         + " WHERE " + Common.Game._ID
                         + " IN (SELECT " + Common.Game._ID + " FROM " + Common.Game.TABLE_NAME
-                        + " ORDER BY " + Common.Game._ID + " DESC LIMIT 10 OFFSET 5);\n" +
+                        + " ORDER BY " + Common.Game._ID + " DESC LIMIT 10 OFFSET 4);\n" +
                         "END;");
-        db.execSQL(Common.SQL_CREATE_JUMPS);
+        db.execSQL(SQL_CREATE_JUMPS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(Common.SQL_DELETE_GAMES);
+        db.execSQL(SQL_DELETE_GAMES);
+        db.execSQL(SQL_DELETE_JUMPS);
         onCreate(db);
     }
 }

@@ -13,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.pole_vault_tracker.storage.Local;
+import com.example.pole_vault_tracker.storage.Remote;
 import com.example.pole_vault_tracker.storage.model.Game;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 
 public class EditGameAttributes extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -90,6 +92,13 @@ public class EditGameAttributes extends AppCompatActivity implements ActivityCom
     private void sync() {
         game.setLocation(gameLocationEditText.getText().toString());
         game.setPlayerName(playerNameEditText.getText().toString());
+        new Thread(() -> {
+            try {
+                Remote.updateGame(game);
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }).start();
         Local.updateGame(this, game);
     }
 }

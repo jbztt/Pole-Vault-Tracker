@@ -16,8 +16,8 @@ public class Game {
         this.location = location;
     }
 
-    public Game(){
-        this(0,"","");
+    public Game() {
+        this(0, "", "");
     }
 
     public static DiffUtil.ItemCallback<Game> DIFF_CALLBACK = new DiffUtil.ItemCallback<Game>() {

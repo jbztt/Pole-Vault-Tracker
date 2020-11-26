@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pole-Vault-Tracker</string>
+    <string name="new_game_btn_text">Nouvel Enregistrement</string>
+    <string name="history_btn_text">Historique</string>
+    <string name="player_name_edit_text_hint">Nom Joueur</string>
+    <string name="location_edit_text_hint">Localisation</string>
+    <string name="start_game_btn_text">Voir les évenements</string>
+    <string name="new_jump_btn_text">Ajouter un Saut</string>
+    <string name="game_list_row_player_name_text_view_text">Nom Joueur</string>
+    <string name="game_list_row_location_text_view_text">Localisation</string>
+    <string name="meters_text">mètre(s)</string>
+    <string name="jump_height_edit_text_hint">Hauteur du saut</string>
+    <string name="jump_description_edit_text_hint">Détail</string>
+    <string name="successful_text">Valide</string>
+    <string name="unsuccessful_text">Non Valide</string>
+    <string name="previous_games_text_view_text">5 derniers enregistrements</string>
+    <string name="title_activity_full_history">Historique Complet</string>
+    <string name="tenant_name_edit_text">Identifié en tant que</string>
+    <string-array name="languages_array">
+        <item>Français</item>
+        <item>Anglais</item>
+    </string-array>
+</resources>

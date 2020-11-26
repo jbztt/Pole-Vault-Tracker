@@ -29,6 +29,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/jump_description_input_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:endIconDrawable="@android:drawable/ic_menu_camera"

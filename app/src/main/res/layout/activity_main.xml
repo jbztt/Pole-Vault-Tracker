@@ -6,6 +6,22 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/languages_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/logged_in_as_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tenant_name_edit_text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/new_game_btn"
         android:layout_width="match_parent"
@@ -13,17 +29,19 @@
         android:text="@string/new_game_btn_text" />
 
     <Button
+        android:id="@+id/history_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/history_btn_text" />
 
-    <TextView
+    <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/previous_games_text_view_text" />
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/previous_matches_recycler_view"
+        android:id="@+id/previous_games_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

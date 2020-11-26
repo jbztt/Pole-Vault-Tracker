@@ -16,6 +16,7 @@ import java.util.function.BiConsumer;
 public class GameAdapter extends ListAdapter<Game, GameAdapter.GameViewHolder> {
 
     private BiConsumer<Integer, View> onItemClickListener;
+
     public GameAdapter() {
         super(Game.DIFF_CALLBACK);
     }
@@ -23,7 +24,7 @@ public class GameAdapter extends ListAdapter<Game, GameAdapter.GameViewHolder> {
     @NonNull
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        GameViewHolder gameViewHolder= new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_row, parent, false));
+        GameViewHolder gameViewHolder = new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_row, parent, false));
         gameViewHolder.itemView.setOnClickListener(v -> this.onItemClickListener.accept(gameViewHolder.getAdapterPosition(), v));
         return gameViewHolder;
     }
