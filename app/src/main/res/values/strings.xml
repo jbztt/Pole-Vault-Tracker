@@ -4,13 +4,13 @@
     <string name="history_btn_text">History</string>
     <string name="player_name_edit_text_hint">Player Name</string>
     <string name="location_edit_text_hint">Location</string>
-    <string name="start_match_btn_text">Start Match</string>
+    <string name="start_match_btn_text">Start Game</string>
     <string name="new_jump_btn_text">New Jump</string>
-    <string name="successful_jump_checkbox_text">Success</string>
-    <string name="approach_and_plant_section_text_view_text">Approach and Plant</string>
-    <string name="jump_section_score_edit_text_hint">Score</string>
-    <string name="takeoff_and_swing_up_section_text_view_text">Takeoff and Swing Up</string>
-    <string name="extension_and_turn_section_text_view_text">Extension and Turn</string>
     <string name="game_list_row_player_name_text_view_text">Player Name</string>
     <string name="game_list_row_location_text_view_text">Location</string>
+    <string name="meters_text">meter(s)</string>
+    <string name="jump_height_edit_text_hint">Jump Height</string>
+    <string name="jump_description_edit_text_hint">Description</string>
+    <string name="successful_text">Successful</string>
+    <string name="unsuccessful_text">Unsuccessful</string>
 </resources>

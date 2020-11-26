@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pole_vault_tracker.storage.model.Game;
 
+import java.util.function.BiConsumer;
+
 public class GameAdapter extends ListAdapter<Game, GameAdapter.GameViewHolder> {
 
-
+    private BiConsumer<Integer, View> onItemClickListener;
     public GameAdapter() {
         super(Game.DIFF_CALLBACK);
     }
@@ -21,13 +23,19 @@ public class GameAdapter extends ListAdapter<Game, GameAdapter.GameViewHolder> {
     @NonNull
     @Override
     public GameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_row, parent, false));
+        GameViewHolder gameViewHolder= new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_list_row, parent, false));
+        gameViewHolder.itemView.setOnClickListener(v -> this.onItemClickListener.accept(gameViewHolder.getAdapterPosition(), v));
+        return gameViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull GameViewHolder holder, int position) {
         Game game = getItem(position);
         if (game != null) holder.bindTo(game);
+    }
+
+    public void setOnItemClickListener(BiConsumer<Integer, View> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     static class GameViewHolder extends RecyclerView.ViewHolder {

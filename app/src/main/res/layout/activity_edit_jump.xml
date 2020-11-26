@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,47 +13,37 @@
         android:orientation="vertical">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/successful_jump_check_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/successful_jump_checkbox_text" />
+            android:text="@string/successful_text" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/approach_and_plant_section_text_view_text" />
+            app:suffixText="@string/meters_text">
 
-        <include
-            layout="@layout/comon_edit_jump_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jump_height_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/jump_height_edit_text_hint"
+                android:inputType="number" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/takeoff_and_swing_up_section_text_view_text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <include
-            layout="@layout/comon_edit_jump_section"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            app:endIconDrawable="@android:drawable/ic_menu_camera"
+            app:endIconMode="custom">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/extension_and_turn_section_text_view_text" />
-
-        <include
-            layout="@layout/comon_edit_jump_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jump_description_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/jump_description_edit_text_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

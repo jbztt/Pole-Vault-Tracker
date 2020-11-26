@@ -14,12 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PoleVaultTracker">
         <activity android:name=".EditJump"
-            android:parentActivityName=".EditMatchEvents"/>
+            android:parentActivityName=".EditGameEvents"/>
         <activity
-            android:name=".EditMatchEvents"
-            android:parentActivityName=".EditMatchAttributes" />
+            android:name=".EditGameEvents"
+            android:parentActivityName=".EditGameAttributes" />
         <activity
-            android:name=".EditMatchAttributes"
+            android:name=".EditGameAttributes"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
