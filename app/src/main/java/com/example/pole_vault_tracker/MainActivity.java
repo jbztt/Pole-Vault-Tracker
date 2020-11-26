@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.new_match_btn).setOnClickListener(v -> startEditGameAttributes(Local.insertGame(this)));
+        findViewById(R.id.new_game_btn).setOnClickListener(v -> startEditGameAttributes(Local.insertGame(this)));
         RecyclerView recyclerView = findViewById(R.id.previous_matches_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

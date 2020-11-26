@@ -4,26 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".EditGameEvents">
 
     <Button
-        android:id="@+id/new_game_btn"
+        android:id="@+id/new_jump_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_game_btn_text" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/history_btn_text" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/previous_games_text_view_text" />
+        android:text="@string/new_jump_btn_text" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/previous_matches_recycler_view"
+        android:id="@+id/previous_jumps_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

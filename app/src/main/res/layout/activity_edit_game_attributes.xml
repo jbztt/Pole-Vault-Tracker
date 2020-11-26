@@ -5,39 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:tooltipText="@string/app_name"
-    tools:context=".EditJump">
-
-    <CheckBox
-        android:id="@+id/successful_jump_check_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/successful_text" />
+    tools:context=".EditGameAttributes">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:suffixText="@string/meters_text">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/jump_height_edit_text"
+            android:id="@+id/player_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/jump_height_edit_text_hint"
-            android:inputType="number" />
-
+            android:hint="@string/player_name_edit_text_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/match_location_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:endIconDrawable="@android:drawable/ic_menu_camera"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_my_location_24px"
         app:endIconMode="custom">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/jump_description_edit_text"
+            android:id="@+id/match_location_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/jump_description_edit_text_hint" />
+            android:hint="@string/location_edit_text_hint" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/start_game_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_game_btn_text" />
 </LinearLayout>

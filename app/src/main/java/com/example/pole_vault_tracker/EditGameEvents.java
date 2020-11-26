@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,7 +18,7 @@ public class EditGameEvents extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_match_events);
+        setContentView(R.layout.activity_edit_game_events);
         findViewById(R.id.new_jump_btn).setOnClickListener(v -> startEditJumpActivity(Local.insertJump(this, Local.getActiveGameID(this))));
 
         RecyclerView recyclerView = findViewById(R.id.previous_jumps_recycler_view);

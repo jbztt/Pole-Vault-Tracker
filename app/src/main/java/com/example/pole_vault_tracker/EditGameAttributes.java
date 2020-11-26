@@ -29,7 +29,7 @@ public class EditGameAttributes extends AppCompatActivity implements ActivityCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_match_attributes);
+        setContentView(R.layout.activity_edit_game_attributes);
         gameLocationEditText = findViewById(R.id.match_location_edit_text);
         playerNameEditText = findViewById(R.id.player_name_edit_text);
         game = Local.getGame(this, Local.getActiveGameID(this));
@@ -39,7 +39,7 @@ public class EditGameAttributes extends AppCompatActivity implements ActivityCom
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         ((TextInputLayout) findViewById(R.id.match_location_input_layout)).setEndIconOnClickListener(v -> getLocation());
 
-        findViewById(R.id.start_match_btn).setOnClickListener(v -> {
+        findViewById(R.id.start_game_btn).setOnClickListener(v -> {
             sync();
             startActivity(new Intent(this, EditGameEvents.class));
         });
